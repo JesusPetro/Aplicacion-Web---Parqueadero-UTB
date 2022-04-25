@@ -1,0 +1,69 @@
+
+tabla de visitas 
+   <table class="table">
+    <thead class="thead-light text-white">
+      <tr>
+          <th scope="col">fecha</th>
+          <th scope="col">visitante</th>
+          <th scope="col">placa</th>
+          <th scope="col">estado</th>
+          
+      </tr>
+    </thead>
+    <tbody class="thead-light text-white">
+        {% for vist in visitas %}
+        <tr>
+            <th>{{vist[4]}}</th>
+            <td>{{vist[1]}} {{vist[2]}}</td>
+            <td>{{vist[3]}}</td>
+            {% if vist[7]==0 %}
+                <td><button type="button" class="btn btn-danger">Inactiva</button></td>
+            {% endif %}
+            {% if vist[7]==1 %}
+                <td><button type="button" class="btn btn-success">Activa</button></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+
+
+  auxiliar de registro de placa por stream
+  <div class="h-100 p-5 text-white  rounded-3 bg-dark">
+    <!-- mensajes de verificacion  -->      
+{% with messages = get_flashed_messages()  %}
+{% if messages %}
+{% for message in messages %}
+{% if mensaje_error==1 %}
+ <div class="alert alert-danger alert-dismissible fade show" role="alert">
+   {{ message }}
+   <a href="/home_vigilante"></a><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></a>
+ </div>
+ {% endif %}
+ {% if mensaje_error==0 %}
+ <div class="alert alert-success alert-dismissible fade show" role="alert">
+   {{ message }}
+   <a href="/home_vigilante"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></a>
+ </div>
+ {% endif %}
+{% endfor %}
+{% endif %}
+{% endwith %}
+       
+<form class=" " action="/validar_visita" method="post">
+  <div class="form-floating mb-3">
+    <h2 class="fw-boldmb-0">Registro de visitas </h2> 
+    </div>
+    <div class="form-floating mb-3">
+      <p>ingrese la placa del vehiculo al entrar y salir de la universidad para verificar el registro de la visita </p>
+    </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control rounded-4" id="floatingInput" name="placa" >
+    <label for="floatingInput">placa</label>
+  </div>
+  <button class="w-100 mb-2 btn btn-lg rounded-4 btn-success" type="submit">verificar</button> 
+</form>
+</div>
+</div>
+</div>
